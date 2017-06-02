@@ -1,0 +1,49 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="description" content="Creating Modal Window with Twitter Bootstrap">
+		<link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
+		<link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap-theme.min.css">
+	</head>
+	<script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+	<script src="http://cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+	<body>
+		<div id="myElement">
+			hello
+		</div>
+	</body>
+	<script>
+	//getter 动态计算属性
+		var log = ['test']
+		var obj = {
+			get latest() {//lastest : function(){}
+				if(log.length==0) return;
+				return log[log.length -1]
+			}
+		}
+		
+		console.log(obj.latest);//obj.latest()
+		
+		var o = {a : 1}
+		Object.defineProperty(o,'b',{
+			get: function() {
+				return this.a + 1;
+			}
+		})
+		console.log(o.b)
+		
+		
+		//自定义事件触发 
+		var relatedTarget = {
+			relatedTarget : 111
+		}
+		
+		var e = $.Event('show.bs.myElement',relatedTarget)
+		
+		$('#myElement').on('show.bs.myElement',function(e){
+			console.log(e.relatedTarget);
+		}).trigger(e)
+		
+	</script>
+</html>

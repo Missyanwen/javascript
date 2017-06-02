@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="description" content="Creating Modal Window with Twitter Bootstrap">
+		<link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
+		<link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap-theme.min.css">
+	</head>
+	<script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+	<script src="http://cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <style>
+
+    </style>
+	<body>
+	</body>
+	<script>
+	
+    var data = [
+        {
+            "parentId":0,
+            "nodeId":20,
+            "nodeLevel":1,
+            "nodeName":"老板"
+        },{
+            "parentId":20,
+            "nodeId":30,
+            "nodeLevel":2,
+            "nodeName":"黄经理"
+        },{
+            "parentId":20,
+            "nodeId":32,
+            "nodeLevel":2,
+            "nodeName":"张经理"
+        },{
+            "parentId":30,
+            "nodeId":37,
+            "nodeLevel":3,
+            "nodeName":"黄经理下属主管"
+        },{
+            "parentId":32,
+            "nodeId":56,
+            "nodeLevel":3,
+            "nodeName":"张经理下属主管"
+        }
+    ];
+
+    function search(data,p_id){
+        var temp = [];
+        for(var index in data){
+            if (data[index].parentId == p_id) {
+                temp.push(data[index]);
+            }
+        }
+        return temp;
+    }
+
+    function test(p_id = 0){
+        var arr = [];
+        var searchResult = search(data,p_id);
+        for(var i in searchResult){
+            arr.push({"name":searchResult[i].nodeName,"nodeId":searchResult[i].nodeId,"children":test(searchResult[i].nodeId)})
+        }
+        return arr;
+    }
+
+    console.log(JSON.stringify(test()));
+	</script>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+ 
+<head>
+        <meta charset="UTF-8">
+        <title>vue2-demo</title>
+
+</head>
+ 
+<body>
+    
+    <script>
+       ;(function(){
+          console.log('-------------in-------------------')
+          var obj = {
+              name : 'jack'
+          }
+          console.log('name' in obj);//true
+          console.log('toString' in obj);//true
+       })()
+
+       ;(function(){
+           console.log('--------------hasOwnProperty------------------')
+           var obj = {
+               name: 'jack'
+           }
+           console.log(obj.hasOwnProperty('name'))//true
+           console.log(obj.hasOwnProperty('toString'))//false
+       })()
+
+       ;(function(){
+           console.log('--------------------------------')
+           var demo = {
+               foo : 1
+           };
+           Object.defineProperty(demo, 'foobar', {
+               get: function() {
+                   return v;
+               },
+               set: function(e) {
+                   v = e;
+                   sow();
+               }
+           })
+
+           function sow() {
+               document.querySelector('body').innerHTML = demo.foobar;
+           }
+           demo.foobar = 'hello'
+
+           setTimeout(function(){
+               demo.foobar = 'bye'
+               setTimeout(function(){
+                   demo.foobar="kk"
+               },1000)
+           },1000)
+       })()
+
+       ;(function(){
+           console.log('--------------------------------')
+
+           var Bar = function() {}
+           var b = new Bar();
+           console.log(b instanceof Bar);
+           console.log(Bar.prototype.isPrototypeOf(b))
+           console.log(Object.prototype.isPrototypeOf(Bar))
+       })()
+
+
+    </script>
+</body>
+ 
+</html>

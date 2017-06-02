@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>带平滑效果的js返回顶部特效</title>
+<style>
+body{
+    height:2000px;
+}
+#back-to-top{
+    position:fixed;
+    right:25px;
+    bottom:25px;
+    display:block;
+    width:26px;
+    height:62px;
+    background-color: red;
+    transition: all 0.2s ease-in-out;
+}
+
+
+</style>
+</head>
+<body>
+
+<p id="back-to-top"><a href="#top"><span></span></a></p>
+
+</div>
+</body>
+
+<script type="text/javascript">
+    global.value = 'I am in global';
+    //假设全局有个value的变量
+    var obj = {
+        value: "I am in fn2",
+        fn: function () {
+            return this.value;
+        }
+        //这个函数的意义是说返回obj的value
+    　  //我想得到这个方法的单例模式方法
+    }
+
+    var getSingle1 = function getSingle(fn) {
+        var result;
+        return function () {
+            return result || (result = fn.apply(obj, arguments));
+        };
+    };//强制改变this的单例模式
+
+    var getSingle2 = function getSingle(fn) {
+        var result;
+        return function () {
+            return result || (result = fn());
+        };
+    };//仅仅采用回调函数执行的单例模式
+
+    var fnSingle1 = getSingle1(obj.fn);
+    var fnSingle2 = getSingle2(obj.fn);
+
+    console.log(obj.fn());//I am in fn2
+
+    console.log(fnSingle1());// I am in fn2
+    console.log(fnSingle2());// I am in global
+
+    /*这段代码本身没什么意义，假如你要包装的单利方法是一个对象的方法时，
+    如果不针对调用方法的this做处理，会有隐患，像你问题中默认单例方法就是
+    全局是没什么意义，因为本身就算用callback的形式调用，它的this也是全局，
+    但是如果你如果想包装对象的方法，那对象的方法的this不指向它的对象，明显
+    是不正确的
+     */
+</script>
+</html>
+

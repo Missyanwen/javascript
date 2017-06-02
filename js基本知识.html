@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+ 
+<head>
+        <meta charset="UTF-8">
+        <title>vue2-demo</title>
+
+</head>
+ 
+<body>
+    
+    <ul id="ul1"></ul>
+    <script>
+        /******对象继承*******/
+        ;(function(window){
+            function parent(name) {
+                this.name = name;
+            }
+
+            parent.prototype.showName = function() {
+                console.log('他叫：' + this.name);
+            }
+
+            function children(name) {
+                parent.call(this,name);
+            }
+
+            children.prototype = new parent();
+
+            var c = new children('小明');
+            c.showName();
+         })(window);
+        /*********连等赋值************/
+        
+        (function(window){
+            var a = {n:1}
+            var b = a;
+            a.x = a ={n:2}
+
+            console.log(a.x);
+            console.log(b.x);
+        })(window);
+        
+
+        /**********闭包*************/
+        console.log('---------闭包--------')
+        ;(function(window){
+            var number=2;
+            var obj={
+                number:4,
+                fn1:(function(){
+                    var number;
+                    this.number*=2;
+
+                    number=number*2;
+                    number=3;
+                    return function(){
+                        var num=this.number;
+                        this.number*=2;
+                        console.log(num);
+                        number*=3;
+                        console.log(number);
+                    }
+                })(),
+
+                db2:function(){
+                    this.number*=2;
+                }
+            }
+            var fn1=obj.fn1;
+            console.log(number);//2
+            fn1();
+            obj.fn1();
+            console.log(window.number);
+            console.log(obj.number);
+        })(window);
+        console.log('---------闭包--------')
+        /************************/
+        ;(function(window){
+            var value = [[0, 1], [2, 3], [4, 5]].reduce(function(a, b) {
+                return a.concat(b);
+            }, []);
+            console.log(value);
+        })(window)
+    </script>
+</body>
+ 
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="description" content="Creating Modal Window with Twitter Bootstrap">
+		<link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
+		<link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap-theme.min.css">
+	</head>
+	<script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+	<script src="http://cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <style>
+
+    </style>
+	<body>
+        <center>
+            <p>
+               只有一个级别的继承，你的例子可能不会让你看到Object.create的真正的好处。
+               此方法允许您轻松实现差异继承，其中对象可以直接从其他对象继承。
+               可以看到，属性可以在Object.create的第二个参数上初始化，
+               对象字面量使用类似于Object.defineProperties和Object.defineProperty方法所使用的语法。
+               它允许您设置属性属性(可枚举，可写或可配置)，这可以是真正有用的。
+            </p>
+        </center>
+	</body>
+	<script>
+        var userB = {
+            sayHello: function() {
+                console.log('hello');
+            }
+        };
+        var bob = Object.create(userB, {
+            'id': {
+                value: '你好!',
+                enumerable: true, //false为不可枚举  for ... in 和 Object.keys就用不了了
+                writable:true, //是否可写
+                configurable:false,//是否可删除
+            },
+            'name': {
+                value: 'Bob',
+                enumerable: true,
+                writable:false, //是否可写
+                configurable:false,//是否可删除
+            }
+        })
+
+        console.log(bob)//Object {id: "你好!", name: "Bob"}
+        for(var a in bob) {
+            bob[a] = '哈哈'
+        }
+        console.log(bob)//Object {id: "哈哈", name: "Bob", sayHello: "哈哈"}
+	</script>
+</html>

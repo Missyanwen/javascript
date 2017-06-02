@@ -1,0 +1,68 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+		<title>Twitter Bootstrap Popover Example</title>
+		<meta name="description" content="Creating Modal Window with Twitter Bootstrap">
+		<!-- 新 Bootstrap 核心 CSS 文件 -->
+		<link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
+		
+		<!-- 可选的Bootstrap主题文件（一般不用引入） -->
+		<link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap-theme.min.css">
+
+	</head>
+	<body>
+		<div class="container">
+			<h2>Example of creating Modal with Twitter Bootstrap</h2>
+			<div class="well">
+				<a href="#" id="example" class="btn btn-success" rel="popover" data-content="It's so simple to create a tooltop for my website!" >hover for popover</a>
+			</div>
+		</div>
+		<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+		<script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+		
+		<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+		<script src="http://cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+		
+		<div id="myElement">
+			showClick
+		</div>
+		<script>
+			
+			var wait = function(){
+				
+				var $deferred = $.Deferred()
+				
+				var a = 1;
+				var b = 2;
+				
+				if(a && b) {
+					return $deferred.resolve({
+						objA: a,
+						ojbB: b
+					})
+				}
+			} 
+			
+			wait().then(function(obj){
+				console.log(obj.objA)
+				console.log(obj.ojbB)
+			}).done(function(){
+				console.log('成功')
+			}).fail(function(){
+				console.log('失败')
+			})
+			
+			
+			function showIndex() {
+				console.log('123')
+			}
+			if(!showIndex()){
+				alert('有这个方法')
+			}
+			
+		</script>
+	</body>
+
+</html>

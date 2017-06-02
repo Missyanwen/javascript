@@ -1,0 +1,77 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="description" content="Creating Modal Window with Twitter Bootstrap">
+		<link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
+		<link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap-theme.min.css">
+	</head>
+	<script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+	<script src="http://cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+	<style type="text/css">  
+			.loading {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				color: #b2b2b2;
+				-webkit-user-select: none;
+			}  
+			.loading .icon {
+				margin-right: 10px;
+				font-size: 16px;
+			}
+  </style>  
+	<body>
+		<script>
+			var value = [];
+			[21,0,279,1564].forEach((item)=>{
+				if(Number(item) <= 30) {
+					value.push('0.5小时');
+					return;
+				}
+				if(Number(item) <= 60) {
+					value.push('1小时');
+					return;
+				}
+				if(Number(item) > 60) {
+					let hour = (Math.floor(item / 60) + "." + (item % 60)).split('.');
+					let resultList = 0;
+					let temporaryHour = 0;
+
+					//处理小时0、0.5小时、和1小时
+					if(hour[1] < 31) {
+						if(hour[1] === '0') {
+							temporaryHour = 0
+						}else {
+							temporaryHour = 0.5;
+						}
+					}else {
+						temporaryHour = 1
+					}
+
+					//小时24小时以小时算
+					if(hour[0] < 24) {
+						resultList = (Number(hour[0]) + Number(temporaryHour)) + '小时';
+					}else{
+						//大于24小时以*天(*小时)计算
+						let hours = (Number(temporaryHour) + (hour[0] % 24));
+						let data = Math.floor(hour[0]/24);
+						
+						if(hours === 24) {
+							resultList = data + 1 + '天';
+						}else {
+							if(hours === 0) {
+								resultList = data + '天';
+							}else {
+								resultList = data + '天' + hours + '小时';
+							}
+						}
+					}
+					value.push(resultList);
+				}
+			})
+			console.log(JSON.stringify(value))
+		</script>
+	</body>
+	
+</html>
